@@ -1,0 +1,38 @@
+class Solution {
+public ListNode reverse(ListNode head){
+    ListNode pre=null;
+    ListNode cur=head;
+    while(cur!=null){
+        ListNode newnode=cur.next;
+        cur.next=pre;
+        pre=cur;
+        cur=newnode;
+    }
+    return pre;
+}
+public ListNode findMiddle(ListNode head){
+    ListNode r=head;
+    ListNode t=head;
+    while(r.next!=null && r.next.next!=null){
+        r=r.next.next;
+        t=t.next;
+    }
+    return t;
+}
+    public boolean isPalindrome(ListNode head) {
+        if(head==null || head.next==null){
+            return true;
+        }
+        ListNode middle=findMiddle(head);
+        ListNode Secondhalf=reverse(middle.next);
+        ListNode Firsthalf=head;
+        while(Secondhalf!=null){
+            if(Firsthalf.val!=Secondhalf.val){
+                return false;
+            }
+            Firsthalf=Firsthalf.next;
+            Secondhalf=Secondhalf.next;
+        }
+        return true;
+    }
+}
